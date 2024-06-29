@@ -1,5 +1,6 @@
 package web.service.restful.device_management.Models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,7 @@ public class Employee {
 
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Device> devices = new ArrayList<>();
 
