@@ -100,6 +100,29 @@ public class EmployeeService {
 
     }
 
+    public Employee updateById(EmployeeInputDto employeeInputDto, UUID id) throws NotFoundException, BadRequestException, InternalServerErrorException {
+        Employee employee = employeeRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Employee with id='" + id + "' not found")
+        );
+
+        employee.setUsername(employeeInputDto.username());
+        employee.setFirstName(employeeInputDto.firstName());
+        employee.setLastName(employeeInputDto.lastName());
+        employee.setEmail(employeeInputDto.email());
+
+        try {
+            employeeRepository.save(employee);
+        } catch (DataIntegrityViolationException e) {
+            if (employeeRepository.getAllEmails().contains(employeeInputDto.email()))
+                throw new BadRequestException("Email already exist");
+            if (employeeRepository.getAllUsernames().contains(employeeInputDto.email()))
+                throw new BadRequestException("Username already exist");
+            throw new InternalServerErrorException("Database error");
+        }
+
+        return employee;
+    }
+
     public ConfirmOutputDto deleteById(UUID id) throws NotFoundException {
         Employee employee = findByIdWithDevices(id);
         for (Device d : employee.getDevices()) {
