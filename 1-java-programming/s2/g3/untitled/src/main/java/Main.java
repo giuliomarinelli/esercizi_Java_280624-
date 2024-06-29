@@ -21,7 +21,7 @@ public class Main {
         System.out.println(productList.stream().filter(p -> p.getCategory().equals("Books") && p.getPrice() > 100).toList());
         System.out.println(productList.parallelStream().filter(p -> p.getCategory().equals("Books") && p.getPrice() > 100).toList());
 
-        // da finire è un po' palloso
+
     }
 
 }
