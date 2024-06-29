@@ -20,7 +20,7 @@ public class Employee {
     @Setter(AccessLevel.NONE)
     private UUID id;
 
-    @Column(length = 30)
+    @Column(length = 30, unique = true)
     private String username;
 
     @Column(length = 30)
@@ -29,6 +29,7 @@ public class Employee {
     @Column(length = 30)
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
     @JsonIgnore
