@@ -17,7 +17,7 @@ import web.service.restful.device_management.services.EmployeeService;
 
 import java.util.UUID;
 
-@RestController("/api/employee")
+@RestController("/api/employees")
 public class EmployeeController {
 
     @Autowired
