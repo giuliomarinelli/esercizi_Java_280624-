@@ -32,6 +32,8 @@ public class Employee {
     @Column(unique = true)
     private String email;
 
+    private String profilePictureUrl;
+
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Device> devices = new ArrayList<>();
