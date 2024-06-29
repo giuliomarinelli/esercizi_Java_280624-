@@ -1,6 +1,7 @@
 package web.service.restful.device_management.services;
 
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import web.service.restful.device_management.repositories.EmployeeRepository;
 import java.util.UUID;
 
 @Service
+@Log4j2
 public class EmployeeService {
 
     @Autowired
@@ -71,7 +73,9 @@ public class EmployeeService {
                 () -> new NotFoundException("Device with id='" + deviceId + "' not found")
         );
 
-        Employee employee = employeeRepository.findById(deviceId).orElseThrow(
+
+
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
                 () -> new NotFoundException("Employee with id='" + employeeId + "' not found")
         );
 
@@ -85,6 +89,8 @@ public class EmployeeService {
     }
 
     public ConfirmOutputDto removeDeviceFromEmployee(UUID deviceId) throws NotFoundException {
+
+        log.info(deviceId);
 
         Device device = deviceRepository.findById(deviceId).orElseThrow(
                 () -> new NotFoundException("Device with id='" + deviceId + "' not found")
@@ -126,12 +132,16 @@ public class EmployeeService {
     public ConfirmOutputDto deleteById(UUID id) throws NotFoundException {
         Employee employee = findByIdWithDevices(id);
         for (Device d : employee.getDevices()) {
-            d.setEmployee(null);
-            deviceRepository.save(d);
+            deviceRepository.delete(d);
         }
         employeeRepository.delete(employee);
         return new ConfirmOutputDto(HttpStatus.OK.value(), "Employee with id='" + id
                 + "' has been successfully removed");
+    }
+
+    public void updateEmployeeAfterProfileImageUpload(Employee employee, String url) {
+        employee.setProfilePictureUrl(url);
+        employeeRepository.save(employee);
     }
 
 }

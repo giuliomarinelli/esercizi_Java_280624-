@@ -9,7 +9,9 @@ import web.service.restful.device_management.exception_handling.BadRequestExcept
 import java.util.UUID;
 
 @Entity
-@Table(name = "devices")
+@Table(name = "devices", indexes = {
+        @Index(name = "IDX_type", columnList = "type")
+})
 @Data
 @NoArgsConstructor
 public class Device {

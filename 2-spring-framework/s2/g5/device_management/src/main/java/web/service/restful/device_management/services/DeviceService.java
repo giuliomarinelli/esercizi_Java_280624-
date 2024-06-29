@@ -23,9 +23,9 @@ public class DeviceService {
     private DeviceRepository deviceRepository;
 
     public Page<Device> findAll(Pageable pageable) {
-        return deviceRepository.findAll(pageable).map(p -> {
-            p.setEmployeeId(p.getEmployee().getId());
-            return p;
+        return deviceRepository.findAll(pageable).map(device -> {
+            if (device.getEmployee() != null) device.setEmployeeId(device.getEmployee().getId());
+            return device;
         });
     }
 
@@ -33,14 +33,14 @@ public class DeviceService {
         Device device = deviceRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Device with id='" + id + "' not found")
         );
-        device.setEmployeeId(device.getEmployee().getId());
+        if (device.getEmployee() != null) device.setEmployeeId(device.getEmployee().getId());
         return device;
     }
 
     public Device create(DeviceInputPostDto deviceInputPostDto) throws BadRequestException {
         Device device = new Device(deviceInputPostDto.type());
         deviceRepository.save(device);
-        device.setEmployeeId(device.getEmployee().getId());
+        if (device.getEmployee() != null) device.setEmployeeId(device.getEmployee().getId());
         return device;
     }
 
@@ -62,7 +62,9 @@ public class DeviceService {
         device.setUnderMaintenance(deviceInputPutDto.underMaintenance());
         device.setDecommissioned(deviceInputPutDto.decommissioned());
 
-        device.setEmployeeId(device.getEmployee().getId());
+        deviceRepository.save(device);
+
+        if (device.getEmployee() != null) device.setEmployeeId(device.getEmployee().getId());
         return device;
 
     }

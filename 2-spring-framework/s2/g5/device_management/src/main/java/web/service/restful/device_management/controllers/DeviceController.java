@@ -15,14 +15,19 @@ import web.service.restful.device_management.exception_handling.NotFoundExceptio
 import web.service.restful.device_management.exception_handling.Validation;
 import web.service.restful.device_management.repositories.DeviceRepository;
 import web.service.restful.device_management.services.DeviceService;
+import web.service.restful.device_management.services.EmployeeService;
 
 import java.util.UUID;
 
-@RestController("/api/devices")
+@RestController
+@RequestMapping("/api/devices")
 public class DeviceController {
 
     @Autowired
     private DeviceService deviceService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping
     public Page<Device> findAll(Pageable pageable) {
@@ -49,6 +54,11 @@ public class DeviceController {
     @DeleteMapping("/{id}")
     public ConfirmOutputDto deleteById(@PathVariable UUID id) {
         return deviceService.deleteById(id);
+    }
+
+    @PatchMapping("/{id}/remove-employee")
+    public ConfirmOutputDto removeEmployeeFromDevice(@PathVariable UUID id) throws NotFoundException {
+        return employeeService.removeDeviceFromEmployee(id);
     }
 
 }
