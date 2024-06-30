@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import web.service.restful.device_management.Models.entities.Device;
 import web.service.restful.device_management.Models.entities.Employee;
 import web.service.restful.device_management.Models.inputDto.DeviceIdInputDto;
 import web.service.restful.device_management.Models.inputDto.EmployeeInputDto;
@@ -23,6 +24,7 @@ import web.service.restful.device_management.services.EmployeeService;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -92,6 +94,10 @@ public class EmployeeController {
         return new ConfirmOutputDto(HttpStatus.OK.value(), "Profile image successfully deleted");
     }
 
+    @GetMapping("/{id}/devices")
+    public List<Device> findDevicesByEmployeeId(@PathVariable UUID id) throws NotFoundException {
+        return employeeService.findDevicesByEmployeeId(id);
+    }
 
 
 }

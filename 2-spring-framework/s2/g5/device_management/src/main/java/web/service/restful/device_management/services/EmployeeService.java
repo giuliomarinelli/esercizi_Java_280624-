@@ -18,6 +18,7 @@ import web.service.restful.device_management.exception_handling.NotFoundExceptio
 import web.service.restful.device_management.repositories.DeviceRepository;
 import web.service.restful.device_management.repositories.EmployeeRepository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -45,6 +46,21 @@ public class EmployeeService {
         return employeeRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Employee with id='" + id + "' not found. Cannot update")
         );
+    }
+
+    @Transactional
+    public List<Device> findDevicesByEmployeeId(UUID employeeId) throws NotFoundException {
+
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                () -> new NotFoundException("Employee with id='" + employeeId + "' not found")
+        );
+
+
+        List<Device> devices = employee.getDevices();
+        devices.size(); // Accesso per garantire il caricamento lazy
+        devices = devices.parallelStream().peek(d -> d.setEmployeeId(d.getEmployee().getId())).toList();
+        return devices;
+
     }
 
     public Employee create(EmployeeInputDto employeeInputDto) throws BadRequestException, InternalServerErrorException {
@@ -132,7 +148,9 @@ public class EmployeeService {
     public ConfirmOutputDto deleteById(UUID id) throws NotFoundException {
         Employee employee = findByIdWithDevices(id);
         for (Device d : employee.getDevices()) {
-            deviceRepository.delete(d);
+            d.setEmployee(null);
+            d.setAssigned(false);
+            deviceRepository.save(d);
         }
         employeeRepository.delete(employee);
         return new ConfirmOutputDto(HttpStatus.OK.value(), "Employee with id='" + id

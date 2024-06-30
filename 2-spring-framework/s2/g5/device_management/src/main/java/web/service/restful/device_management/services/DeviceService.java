@@ -1,11 +1,13 @@
 package web.service.restful.device_management.services;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import web.service.restful.device_management.Models.entities.Device;
+import web.service.restful.device_management.Models.entities.Employee;
 import web.service.restful.device_management.Models.enums.DeviceType;
 import web.service.restful.device_management.Models.inputDto.DeviceInputPostDto;
 import web.service.restful.device_management.Models.inputDto.DeviceInputPutDto;
@@ -13,7 +15,9 @@ import web.service.restful.device_management.Models.outputDto.ConfirmOutputDto;
 import web.service.restful.device_management.exception_handling.BadRequestException;
 import web.service.restful.device_management.exception_handling.NotFoundException;
 import web.service.restful.device_management.repositories.DeviceRepository;
+import web.service.restful.device_management.repositories.EmployeeRepository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,6 +25,7 @@ public class DeviceService {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
 
     public Page<Device> findAll(Pageable pageable) {
         return deviceRepository.findAll(pageable).map(device -> {
@@ -74,5 +79,7 @@ public class DeviceService {
         return new ConfirmOutputDto(HttpStatus.OK.value(),
                 "Device with id='" + id + "' successfully deleted");
     }
+
+
 
 }
