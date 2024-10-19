@@ -2,10 +2,12 @@ package classes;
 
 import enums.FunzioneUfficiale;
 
-public class Colonnello extends Ufficiale {
+public class Generale extends Ufficiale {
 
-
-    public Colonnello(Ufficiale responsabile, FunzioneUfficiale funzione) {
-        super(responsabile, funzione, 4000);
+    public Generale(Ufficiale responsabile, FunzioneUfficiale funzione) {
+        super(responsabile, funzione, 5000);
     }
+
+
+
 }

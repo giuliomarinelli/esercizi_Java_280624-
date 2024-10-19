@@ -1,0 +1,578 @@
+{
+	"info": {
+		"_postman_id": "bb743208-1af2-4cd4-b9bd-5e3d5cf4673a",
+		"name": "Device Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35152454"
+	},
+	"item": [
+		{
+			"name": "Find all devices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"LAPTOP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/devices?size&page&sort",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"devices"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": null
+						},
+						{
+							"key": "page",
+							"value": null
+						},
+						{
+							"key": "sort",
+							"value": null
+						}
+					]
+				},
+				"description": "Find pages with all devices"
+			},
+			"response": []
+		},
+		{
+			"name": "Find device by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"LAPTOP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/devices/:id",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "09a00ac2-3232-4766-ace7-46617b4376ac"
+						}
+					]
+				},
+				"description": "Find a device by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Find Devices By EmployeeId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"LAPTOP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id/devices",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id",
+						"devices"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2f765824-28c6-4f0f-8b77-765d0978951d"
+						}
+					]
+				},
+				"description": "Find devices associated to a specific employee given employeeId"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"LAPTOP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/devices",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"devices"
+					]
+				},
+				"description": "Create a new device. Allowed types are: SMARTPHONE, TABLET, LAPTOP, TV."
+			},
+			"response": []
+		},
+		{
+			"name": "Update a device by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"LAPTOP\",\r\n    \"available\": false,\r\n    \"underMaintenance\": false,\r\n    \"decommissioned\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/devices/:id",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						":id"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "09a00ac2-3232-4766-ace7-46617b4376ac"
+						}
+					]
+				},
+				"description": "Update a device by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Find all employees",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"blablabla\",\r\n    \"firstName\": \"Mario\",\r\n    \"lastName\": \"Rossi\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees?page&size&sort",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": null
+						},
+						{
+							"key": "size",
+							"value": null
+						},
+						{
+							"key": "sort",
+							"value": null
+						}
+					]
+				},
+				"description": "Pagination with all employees"
+			},
+			"response": []
+		},
+		{
+			"name": "Find employee by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"blablabla\",\r\n    \"firstName\": \"Mario\",\r\n    \"lastName\": \"Rossi\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "259a02b6-d3de-49fd-bb3e-e7b6497d7fb2"
+						}
+					]
+				},
+				"description": "Find a specific employee by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"blablabla\",\r\n    \"firstName\": \"Mario\",\r\n    \"lastName\": \"Rossi\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees"
+					]
+				},
+				"description": "Create a new employee. \"email\" and \"username\" fields must be unique"
+			},
+			"response": []
+		},
+		{
+			"name": "Update employee by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Marione1\",\r\n    \"firstName\": \"Mario\",\r\n    \"lastName\": \"Rossi\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "259a02b6-d3de-49fd-bb3e-e7b6497d7fb2"
+						}
+					]
+				},
+				"description": "Update an employee by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Assign device to employee",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"deviceId\": \"fdd9f8e2-032f-429e-b22b-b267b67cc33f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id/assign-device",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id",
+						"assign-device"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "259a02b6-d3de-49fd-bb3e-e7b6497d7fb2"
+						}
+					]
+				},
+				"description": "Assign a device to a specific employee"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove device from employee",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{basePath}}/api/devices/:id/remove-employee",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						":id",
+						"remove-employee"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "fdd9f8e2-032f-429e-b22b-b267b67cc33f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Profile Image",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/giuli/OneDrive/Documents/FROM-2015-PC/OneDrive 29-08-2023/Immagini/Catture di schermata/Screenshot (2).png"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id/upload-profile-image",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id",
+						"upload-profile-image"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "259a02b6-d3de-49fd-bb3e-e7b6497d7fb2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete profile Image",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/giuli/OneDrive/Documents/FROM-2015-PC/OneDrive 29-08-2023/Immagini/Catture di schermata/Screenshot (2).png"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id/delete-profile-image",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id",
+						"delete-profile-image"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "259a02b6-d3de-49fd-bb3e-e7b6497d7fb2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Device",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{basePath}}/api/devices/:id",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"devices",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "30f04c3b-1b01-4946-b202-ea5904448ec6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{basePath}}/api/employees/:id",
+					"host": [
+						"{{basePath}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "536e0466-5069-4028-ab49-d666b8ce56c6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "basePath",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

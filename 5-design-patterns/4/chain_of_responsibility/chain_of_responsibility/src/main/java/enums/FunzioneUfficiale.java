@@ -1,2 +1,5 @@
-package enums;public enum FunzioneUfficiale {
+package enums;
+
+public enum FunzioneUfficiale {
+    TENENTE, CAPITANO, MAGGIORE, COLONNELLO, GENERALE
 }

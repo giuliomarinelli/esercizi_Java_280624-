@@ -2,10 +2,10 @@ package classes;
 
 import enums.FunzioneUfficiale;
 
-public class Tenente extends Ufficiale {
+public class Maggiore extends Ufficiale {
 
 
-    public Tenente(Ufficiale responsabile, FunzioneUfficiale funzione) {
-        super(responsabile, funzione, 1000);
+    public Maggiore(Ufficiale responsabile, FunzioneUfficiale funzione) {
+        super(responsabile, funzione, 3000);
     }
 }
